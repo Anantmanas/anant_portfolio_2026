@@ -1,0 +1,1 @@
+ollama launch claude --model minimax-m3:cloud

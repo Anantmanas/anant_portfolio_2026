@@ -1,0 +1,107 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+}
+
+:root {
+  --background: oklch(0.04 0 0);
+  --foreground: oklch(0.96 0 0);
+  --muted: oklch(0.12 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.78 0.16 70);
+  --border: oklch(0.18 0 0);
+  --primary: oklch(0.96 0 0);
+  --font-sans: "Neue Haas Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+@utility text-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+@utility link-underline {
+  position: relative;
+  display: inline-block;
+}
+@utility link-underline-bar {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform-origin: right;
+  transform: scaleX(1);
+  transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@layer base {
+  .grain-overlay {
+    mix-blend-mode: overlay;
+    opacity: 0.55;
+  }
+  .grain-overlay canvas {
+    image-rendering: pixelated;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .grain-overlay {
+      opacity: 0.35;
+    }
+  }
+}
