@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -13,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { GrainOverlay } from "../components/GrainOverlay";
 import { SmoothCursor } from "../components/ui/smooth-cursor";
+import { DynamicIsland } from "../components/ui/dynamic-island";
 
 function NotFoundComponent() {
   return (
@@ -103,14 +105,60 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHome = pathname === "/" || pathname === "";
+  const isWork = pathname.startsWith("/work");
+
+  const homeSections = [
+    { id: "top",        label: "Intro" },
+    { id: "manifesto",  label: "Manifesto" },
+    { id: "info",       label: "About" },
+    { id: "work",       label: "Work" },
+    { id: "skills",     label: "Skills" },
+    { id: "awards",     label: "Awards" },
+    { id: "experience", label: "Experience" },
+    { id: "contact",    label: "Contact" },
+  ];
+  const workSections = [
+    { id: "projects", label: "Projects" },
+  ];
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
+          }}
+        />
       </head>
       <body>
         {children}
         <GrainOverlay />
+        <DynamicIsland
+          position="bottom-center"
+          defaultSectionLabel={isHome ? "Intro" : isWork ? "Projects" : "Page"}
+          storageKey="portfolio-island"
+          lightBg="rgba(15,15,15,0.7)"
+          darkBg="#0a0a0a"
+          sections={isWork ? workSections : homeSections}
+          fonts={[
+            { name: "Inter",  value: "Inter, sans-serif" },
+            { name: "Serif",  value: "'Instrument Serif', serif" },
+            { name: "Mono",   value: "'JetBrains Mono', monospace" },
+          ]}
+          themes={[
+            { name: "Crimson", color: "#cb0c11", color2: "#6f0000" },
+            { name: "Midnight", color: "#0f172a", color2: "#1e293b" },
+            { name: "Emerald",  color: "#10b981", color2: "#34d399" },
+            { name: "Violet",   color: "#8b5cf6", color2: "#a78bfa" },
+            { name: "Sunset",   color: "#f97316", color2: "#fb923c" },
+          ]}
+          showThemeToggle
+          toggleAnimationType="diag-down-right"
+          toggleDuration={500}
+        />
         <SmoothCursor
           color="#ffffff"
           size={18}

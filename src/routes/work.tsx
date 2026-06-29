@@ -133,7 +133,7 @@ function WorkGrid() {
   };
 
   return (
-    <section ref={sectionRef} className="relative px-6 py-24 sm:px-10 sm:py-32">
+    <section ref={sectionRef} id="projects" className="relative px-6 py-24 sm:px-10 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
           {PROJECTS.map((p, i) => (

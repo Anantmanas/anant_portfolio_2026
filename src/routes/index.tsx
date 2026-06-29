@@ -657,7 +657,7 @@ function Contact() {
       <svg
         aria-hidden
         viewBox="0 0 400 400"
-        className="pointer-events-none absolute -top-20 -right-20 h-[420px] w-[420px] opacity-[0.08] mix-blend-screen"
+        className="pointer-events-none absolute -top-20 -right-20 h-[420px] w-[420px] opacity-[0.08] mix-blend-multiply dark:mix-blend-screen"
       >
         <defs>
           <filter id="contact-blob-noise">
@@ -678,7 +678,7 @@ function Contact() {
       <svg
         aria-hidden
         viewBox="0 0 400 400"
-        className="pointer-events-none absolute -bottom-32 -left-32 h-[480px] w-[480px] opacity-[0.06] mix-blend-screen"
+        className="pointer-events-none absolute -bottom-32 -left-32 h-[480px] w-[480px] opacity-[0.06] mix-blend-multiply dark:mix-blend-screen"
       >
         <g fill="none" stroke="currentColor" strokeWidth="0.4">
           {Array.from({ length: 18 }).map((_, i) => (
