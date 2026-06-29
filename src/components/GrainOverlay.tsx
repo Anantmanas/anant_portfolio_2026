@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 const TILE_SIZE = 220;
 const ALPHA = 22;
-const FRAME_MS = 50;
+const FRAME_MS = 60;
 
 function paintFrame(ctx: CanvasRenderingContext2D, size: number) {
   const img = ctx.createImageData(size, size);

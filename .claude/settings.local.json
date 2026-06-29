@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(curl -s http://localhost:8080)"
+      "Bash(curl -s http://localhost:8080)",
+      "Bash(dir C:\\\\Users\\\\anant\\\\Downloads\\\\lovable-project-b653488d\\\\src *)",
+      "Bash(dir C:\\\\Users\\\\anant\\\\Downloads\\\\lovable-project-b653488d\\\\src\\\\components *)",
+      "Bash(dir C:\\\\Users\\\\anant\\\\Downloads\\\\lovable-project-b653488d\\\\src\\\\lib *)",
+      "Bash(dir C:\\\\Users\\\\anant\\\\Downloads\\\\lovable-project-b653488d\\\\src\\\\routes *)",
+      "Bash(dir C:\\\\Users\\\\anant\\\\Downloads\\\\lovable-project-b653488d\\\\src\\\\components\\\\ui *)",
+      "Bash(dir C:\\\\Users\\\\anant\\\\Downloads\\\\lovable-project-b653488d\\\\src\\\\hooks *)",
+      "Bash(where npx *)",
+      "Bash(command *)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

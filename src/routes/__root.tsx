@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { GrainOverlay } from "../components/GrainOverlay";
+import { SmoothCursor } from "../components/ui/smooth-cursor";
 
 function NotFoundComponent() {
   return (
@@ -110,6 +111,17 @@ function RootShell({ children }: { children: ReactNode }) {
       <body>
         {children}
         <GrainOverlay />
+        <SmoothCursor
+          color="#ffffff"
+          size={18}
+          showTrail
+          trailLength={5}
+          rotateOnMove
+          scaleOnClick
+          glowEffect
+          hideOnLeave={false}
+          springConfig={{ damping: 45, stiffness: 400, mass: 1, restDelta: 0.001 }}
+        />
         <Scripts />
       </body>
     </html>
