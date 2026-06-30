@@ -146,6 +146,28 @@ export function SmoothCursor({
     if (typeof document === "undefined") return false;
     return document.documentElement.classList.contains("dark");
   });
+  const [shouldRender, setShouldRender] = useState<boolean>(() => {
+    if (typeof window === "undefined") return true;
+    return !window.matchMedia("(hover: none)").matches && window.innerWidth >= 768;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const compute = () =>
+      setShouldRender(
+        !window.matchMedia("(hover: none)").matches && window.innerWidth >= 768,
+      );
+    compute();
+
+    const hoverQuery = window.matchMedia("(hover: none)");
+    hoverQuery.addEventListener("change", compute);
+    window.addEventListener("resize", compute);
+    return () => {
+      hoverQuery.removeEventListener("change", compute);
+      window.removeEventListener("resize", compute);
+    };
+  }, []);
 
   useEffect(() => {
     const sync = () =>
@@ -184,7 +206,7 @@ export function SmoothCursor({
   const cursorElement = cursor || defaultCursor;
 
   useEffect(() => {
-    if (disabled) return;
+    if (disabled || !shouldRender) return;
 
     const updateVelocity = (currentPos: Position) => {
       const currentTime = Date.now();
@@ -336,6 +358,7 @@ export function SmoothCursor({
     rotation,
     scale,
     disabled,
+    shouldRender,
     showTrail,
     trailLength,
     rotateOnMove,
@@ -348,7 +371,7 @@ export function SmoothCursor({
     onCursorLeave,
   ]);
 
-  if (disabled || !isVisible) return null;
+  if (disabled || !isVisible || !shouldRender) return null;
 
   return (
     <div style={{ color: resolvedColor }}>
