@@ -129,7 +129,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light'){document.documentElement.classList.remove('dark');}else{document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`,
           }}
         />
       </head>
@@ -160,7 +160,6 @@ function RootShell({ children }: { children: ReactNode }) {
           toggleDuration={500}
         />
         <SmoothCursor
-          color="#ffffff"
           size={18}
           showTrail
           trailLength={5}
@@ -168,6 +167,8 @@ function RootShell({ children }: { children: ReactNode }) {
           scaleOnClick
           glowEffect
           hideOnLeave={false}
+          darkColor="#ffffff"
+          lightColor="#0a0a0a"
           springConfig={{ damping: 45, stiffness: 400, mass: 1, restDelta: 0.001 }}
         />
         <Scripts />

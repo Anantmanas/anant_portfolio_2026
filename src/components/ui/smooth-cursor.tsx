@@ -22,6 +22,16 @@ export interface SmoothCursorProps {
   className?: string;
   size?: number;
   color?: string;
+  /**
+   * Cursor color when the document is in dark mode.
+   * @default "#ffffff"
+   */
+  darkColor?: string;
+  /**
+   * Cursor color when the document is in light mode.
+   * @default "#0a0a0a"
+   */
+  lightColor?: string;
   hideOnLeave?: boolean;
   trailLength?: number;
   showTrail?: boolean;
@@ -112,7 +122,9 @@ export function SmoothCursor({
   },
   className,
   size = 25,
-  color = "black",
+  color,
+  darkColor = "#ffffff",
+  lightColor = "#0a0a0a",
   hideOnLeave = true,
   trailLength = 5,
   showTrail = false,
@@ -130,6 +142,24 @@ export function SmoothCursor({
   const [isVisible, setIsVisible] = useState(true);
   const [isClicking, setIsClicking] = useState(false);
   const [trail, setTrail] = useState<Position[]>([]);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof document === "undefined") return false;
+    return document.documentElement.classList.contains("dark");
+  });
+
+  useEffect(() => {
+    const sync = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const resolvedColor = color ?? (isDark ? darkColor : lightColor);
 
   const lastMousePos = useRef<Position>({ x: 0, y: 0 });
   const velocity = useRef<Position>({ x: 0, y: 0 });
@@ -150,7 +180,7 @@ export function SmoothCursor({
     damping: 35,
   });
 
-  const defaultCursor = <DefaultCursorSVG size={size} color={color} />;
+  const defaultCursor = <DefaultCursorSVG size={size} color={resolvedColor} />;
   const cursorElement = cursor || defaultCursor;
 
   useEffect(() => {
@@ -321,7 +351,7 @@ export function SmoothCursor({
   if (disabled || !isVisible) return null;
 
   return (
-    <>
+    <div style={{ color: resolvedColor }}>
       {showTrail &&
         trail.map((pos, index) => (
           <motion.div
@@ -336,8 +366,9 @@ export function SmoothCursor({
               pointerEvents: "none",
               opacity: ((trailLength - index) / trailLength) * 0.5,
               scale: ((trailLength - index) / trailLength) * 0.8,
+              backgroundColor: resolvedColor,
             }}
-            className="w-2 h-2 bg-current rounded-full"
+            className="w-2 h-2 rounded-full"
           />
         ))}
 
@@ -353,7 +384,7 @@ export function SmoothCursor({
           zIndex: 99999,
           pointerEvents: "none",
           willChange: "transform",
-          filter: glowEffect ? `drop-shadow(0 0 10px ${color}40)` : "none",
+          filter: glowEffect ? `drop-shadow(0 0 10px ${resolvedColor}40)` : "none",
         }}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -367,7 +398,7 @@ export function SmoothCursor({
       >
         {cursorElement}
       </motion.div>
-    </>
+    </div>
   );
 }
 
