@@ -275,12 +275,41 @@ function Hero() {
 
         <div className="mt-8 flex flex-col gap-4 border-t border-foreground/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="font-mono text-xs tracking-[0.2em] text-foreground/80">→ V1.0</div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs tracking-[0.2em] text-foreground/80">
-            <a href="https://linkedin.com/in/anant-manas" target="_blank" rel="noreferrer" className="hover:text-foreground">LINKEDIN</a>
-            <span className="text-foreground/30">/</span>
-            <a href="https://github.com/Anantmanas" target="_blank" rel="noreferrer" className="hover:text-foreground">GITHUB</a>
-            <span className="text-foreground/30">/</span>
-            <a href={`mailto:${EMAIL}`} className="hover:text-foreground">EMAIL</a>
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-3 font-mono text-xs tracking-[0.2em] text-foreground/80">
+            <a
+              href="https://linkedin.com/in/anant-manas"
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
+                <span>LINKEDIN</span>
+              </span>
+              <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-[#0a66c2] transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
+            </a>
+            <a
+              href="https://github.com/Anantmanas"
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
+                <span>GITHUB</span>
+              </span>
+              <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-foreground transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
+            </a>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
+                <span>EMAIL</span>
+              </span>
+              <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
+            </a>
           </div>
           <nav className="flex gap-6 font-mono text-xs tracking-[0.2em] text-foreground/80">
             <Link to="/work" className="hover:text-foreground">WORK</Link>
@@ -325,7 +354,7 @@ function Manifesto() {
         <p className="text-display text-[8vw] sm:text-[4.8vw] leading-[1.05]">
           {line1.map((w, i) => (
             <span key={i} data-word className="inline-block mr-[0.25em]">
-              {/creative|emotion\.?/i.test(w) ? <span className="text-serif-italic lowercase">{w}</span> : w}
+              {/creative|emotion\.?/i.test(w) ? <span className="text-serif-italic lowercase text-accent-island">{w}</span> : w}
             </span>
           ))}
         </p>
@@ -345,7 +374,7 @@ function About() {
         <div className="flex flex-col justify-between gap-10">
           <p className="font-mono text-xs tracking-widest text-muted-foreground">(ABOUT)</p>
           <p className="text-2xl leading-snug sm:text-3xl">
-            My name is <span className="text-serif-italic">{FIRST}</span>. A Full Stack Engineer with 3+ years building AI-powered web applications on the MERN stack — RAG pipelines, AI agents, streaming responses, and polished React / Next.js frontends, shipped remote-first from {LOCATION}.
+            My name is <span className="text-serif-italic text-accent-island">{FIRST}</span>. A Full Stack Engineer with 3+ years building AI-powered web applications on the MERN stack — RAG pipelines, AI agents, streaming responses, and polished React / Next.js frontends, shipped remote-first from {LOCATION}.
           </p>
           <a href="#contact" className="group inline-flex items-center gap-3 self-start font-mono text-xs tracking-widest">
             <span>CONTACT</span>
@@ -563,7 +592,7 @@ function Skills() {
                 <div className="min-h-0 overflow-hidden">
                   <ul className="flex flex-col gap-1 pb-6 pl-1">
                     {s.items.map((it) => (
-                      <li key={it} className="text-serif-italic text-xl text-muted-foreground sm:text-2xl">{it}</li>
+                      <li key={it} className="text-serif-italic text-xl text-accent-island sm:text-2xl">{it}</li>
                     ))}
                   </ul>
                 </div>
@@ -691,19 +720,19 @@ function Contact() {
         <p className="mb-16 font-mono text-xs tracking-widest text-muted-foreground">(CONTACT)</p>
         <div className="grid gap-12 sm:grid-cols-2">
           <p className="text-2xl leading-snug">
-            Open to <span className="text-serif-italic">remote</span> full-time roles and freelance engagements worldwide.
+            Open to <span className="text-serif-italic text-accent-island">remote</span> full-time roles and freelance engagements worldwide.
           </p>
           <p className="text-2xl leading-snug text-muted-foreground">
-            <span className="text-serif-italic text-foreground">Open</span> to interesting collaborations — let's build AI-powered products that ship and scale.
+            <span className="text-serif-italic text-accent-island">Open</span> to interesting collaborations — let's build AI-powered products that ship and scale.
           </p>
         </div>
 
         {/* Humble secondary CTA — quiet call-out */}
         <p className="mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Currently considering new projects and full-time roles <span className="text-serif-italic text-foreground">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
+          Currently considering new projects and full-time roles <span className="text-serif-italic text-accent-island">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
         </p>
 
-        <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors hover:text-accent break-all">
+        <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors text-accent-island hover:text-foreground break-all">
           {EMAIL.split("@")[0]}<span className="text-serif-italic">@</span>{EMAIL.split("@")[1]}
         </a>
         <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} · {LOCATION}</p>

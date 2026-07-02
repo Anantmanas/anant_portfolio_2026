@@ -98,6 +98,11 @@
   &::-webkit-scrollbar { display: none; }
 }
 
+@utility text-accent-island {
+  color: var(--island-color, currentColor);
+  transition: color 250ms ease;
+}
+
 @layer base {
   .grain-overlay {
     mix-blend-mode: multiply;
