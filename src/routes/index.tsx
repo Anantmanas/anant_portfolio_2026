@@ -9,7 +9,6 @@ import {
   PROJECTS,
   SKILLS,
   EXPERIENCE,
-  AWARDS,
   FIRST,
   LAST,
   EMAIL,
@@ -142,7 +141,7 @@ const SECTIONS = [
   { id: "info", label: "About", href: "#info" },
   { id: "work", label: "Projects", href: "/work" },
   { id: "skills", label: "Skills", href: "#skills" },
-  { id: "awards", label: "Awards", href: "#awards" },
+  // { id: "awards", label: "Awards", href: "#awards" },
   { id: "experience", label: "Experience", href: "#experience" },
   { id: "contact", label: "Contact", href: "#contact" },
 ];
@@ -225,9 +224,8 @@ function SideScrollMenu() {
               className="group flex items-center gap-3"
             >
               <span
-                className={`font-mono text-[11px] tracking-widest transition-all duration-500 ${
-                  isActive ? "opacity-100 text-foreground" : "opacity-0 group-hover:opacity-60 text-muted-foreground"
-                }`}
+                className={`font-mono text-[11px] tracking-widest transition-all duration-500 ${isActive ? "opacity-100 text-foreground" : "opacity-0 group-hover:opacity-60 text-muted-foreground"
+                  }`}
               >
                 {s.label}
               </span>
@@ -605,60 +603,60 @@ function Skills() {
   );
 }
 
-function Awards() {
-  const ref = useRef<HTMLElement>(null);
-  useEffect(() => {
-    let mounted = true;
-    (async () => {
-      const { default: gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-      if (!mounted || !ref.current) return;
-      const items = ref.current.querySelectorAll<HTMLElement>(".award-row");
-      gsap.fromTo(
-        items,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "expo.out",
-          stagger: 0.08,
-          scrollTrigger: { trigger: ref.current, start: "top 75%", toggleActions: "play none none reverse" },
-        },
-      );
-    })();
-    return () => { mounted = false; };
-  }, []);
+// function Awards() {
+//   const ref = useRef<HTMLElement>(null);
+//   useEffect(() => {
+//     let mounted = true;
+//     (async () => {
+//       const { default: gsap } = await import("gsap");
+//       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+//       gsap.registerPlugin(ScrollTrigger);
+//       if (!mounted || !ref.current) return;
+//       const items = ref.current.querySelectorAll<HTMLElement>(".award-row");
+//       gsap.fromTo(
+//         items,
+//         { opacity: 0, y: 40 },
+//         {
+//           opacity: 1,
+//           y: 0,
+//           duration: 0.9,
+//           ease: "expo.out",
+//           stagger: 0.08,
+//           scrollTrigger: { trigger: ref.current, start: "top 75%", toggleActions: "play none none reverse" },
+//         },
+//       );
+//     })();
+//     return () => { mounted = false; };
+//   }, []);
 
-  return (
-    <section ref={ref} id="awards" className="px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-16 flex items-end justify-between">
-          <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS · RECOGNITION)</p>
-          <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023 — 2025</p>
-        </div>
-        <ul className="border-t border-border">
-          {AWARDS.map((a) => (
-            <li
-              key={`${a.year}-${a.title}`}
-              className="award-row grid grid-cols-1 gap-3 border-b border-border py-8 sm:grid-cols-[auto_1fr_auto] sm:items-baseline sm:gap-8"
-            >
-              <span className="font-mono text-xs text-muted-foreground tabular-nums">{a.year}</span>
-              <div className="min-w-0">
-                <h3 className="text-display text-2xl leading-tight sm:text-4xl">
-                  {a.title} <span className="text-serif-italic text-muted-foreground">— {a.org}</span>
-                </h3>
-                <p className="mt-2 max-w-2xl text-sm text-muted-foreground leading-relaxed">{a.note}</p>
-              </div>
-              <span className="font-mono text-[10px] tracking-widest text-muted-foreground sm:text-right">★ RECOGNISED</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
+//   return (
+//     <section ref={ref} id="awards" className="px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
+//       <div className="mx-auto max-w-6xl">
+//         <div className="mb-16 flex items-end justify-between">
+//           <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS · RECOGNITION)</p>
+//           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023 — 2025</p>
+//         </div>
+//         <ul className="border-t border-border">
+//           {AWARDS.map((a) => (
+//             <li
+//               key={`${a.year}-${a.title}`}
+//               className="award-row grid grid-cols-1 gap-3 border-b border-border py-8 sm:grid-cols-[auto_1fr_auto] sm:items-baseline sm:gap-8"
+//             >
+//               <span className="font-mono text-xs text-muted-foreground tabular-nums">{a.year}</span>
+//               <div className="min-w-0">
+//                 <h3 className="text-display text-2xl leading-tight sm:text-4xl">
+//                   {a.title} <span className="text-serif-italic text-muted-foreground">— {a.org}</span>
+//                 </h3>
+//                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground leading-relaxed">{a.note}</p>
+//               </div>
+//               <span className="font-mono text-[10px] tracking-widest text-muted-foreground sm:text-right">★ RECOGNISED</span>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//     </section>
+//   );
+// }
 
 function Experience() {
   return (
@@ -720,19 +718,19 @@ function Contact() {
         <p className="mb-16 font-mono text-xs tracking-widest text-muted-foreground">(CONTACT)</p>
         <div className="grid gap-12 sm:grid-cols-2">
           <p className="text-2xl leading-snug">
-            Open to <span className="text-serif-italic text-accent-island">remote</span> full-time roles and freelance engagements worldwide.
+            Open to <span className="text-serif-italic">remote</span> full-time roles and freelance engagements worldwide.
           </p>
           <p className="text-2xl leading-snug text-muted-foreground">
-            <span className="text-serif-italic text-accent-island">Open</span> to interesting collaborations — let's build AI-powered products that ship and scale.
+            <span className="text-serif-italic text-foreground">Open</span> to interesting collaborations — let's build AI-powered products that ship and scale.
           </p>
         </div>
 
         {/* Humble secondary CTA — quiet call-out */}
         <p className="mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Currently considering new projects and full-time roles <span className="text-serif-italic text-accent-island">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
+          Currently considering new projects and full-time roles <span className="text-serif-italic text-foreground">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
         </p>
 
-        <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors text-accent-island hover:text-foreground break-all">
+        <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors hover:text-accent-island break-all">
           {EMAIL.split("@")[0]}<span className="text-serif-italic">@</span>{EMAIL.split("@")[1]}
         </a>
         <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} · {LOCATION}</p>
@@ -789,7 +787,7 @@ function Index() {
       <About />
       <Projects />
       <Skills />
-      <Awards />
+      {/* <Awards /> */}
       <Experience />
       <Contact />
       <Footer />
