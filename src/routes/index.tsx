@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import profileImg from "@/assets/profile.jpg";
 import chatRoomImg from "@/assets/project_thumbnails/ChatRoom.jpeg";
@@ -367,12 +367,12 @@ function About() {
       <div className="mx-auto grid max-w-6xl gap-12 sm:grid-cols-[1fr_1.2fr] sm:gap-20">
         <div className="relative">
           <img src={profileImg} alt="Portrait" width={768} height={960} loading="lazy" className="w-full grayscale aspect-[4/5] object-cover" />
-          <div className="absolute -bottom-3 left-0 font-mono text-[10px] tracking-widest text-muted-foreground">[ FIG. 01 â€” PORTRAIT ]</div>
+          <div className="absolute -bottom-3 left-0 font-mono text-[10px] tracking-widest text-muted-foreground">[ FIG. 01- PORTRAIT ]</div>
         </div>
         <div className="flex flex-col justify-between gap-10">
           <p className="font-mono text-xs tracking-widest text-muted-foreground">(ABOUT)</p>
           <p className="text-2xl leading-snug sm:text-3xl">
-            My name is <span className="text-serif-italic text-accent-island">{FIRST}</span>. A Full Stack Engineer with 3+ years building AI-powered web applications on the MERN stack â€” RAG pipelines, AI agents, streaming responses, and polished React / Next.js frontends, shipped remote-first from {LOCATION}.
+            My name is <span className="text-serif-italic text-accent-island">{FIRST}</span>. A Full Stack Engineer with 3+ years building AI-powered web applications on the MERN stack- RAG pipelines, AI agents, streaming responses, and polished React / Next.js frontends, shipped remote-first from {LOCATION}.
           </p>
           <a href="#contact" className="group inline-flex items-center gap-3 self-start font-mono text-xs tracking-widest">
             <span>CONTACT</span>
@@ -460,7 +460,7 @@ function Projects() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 flex items-end justify-between">
           <p className="font-mono text-xs tracking-widest text-muted-foreground">(SELECTED WORK Â· {PROJECTS.length})</p>
-          <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2021 â€” 2025</p>
+          <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2021- 2025</p>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
@@ -472,7 +472,7 @@ function Projects() {
               onMouseLeave={() => setHovered(null)}
               onClick={() => { if (p.url) window.open(p.url, "_blank", "noopener,noreferrer"); }}
             >
-              {/* Cover â€” gradient placeholder (fallback) + screenshot when available */}
+              {/* Cover- gradient placeholder (fallback) + screenshot when available */}
               <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient}`} />
               {p.image && (
                 <img
@@ -646,7 +646,7 @@ function Skills() {
 //       <div className="mx-auto max-w-6xl">
 //         <div className="mb-16 flex items-end justify-between">
 //           <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS Â· RECOGNITION)</p>
-//           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023 â€” 2025</p>
+//           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023- 2025</p>
 //         </div>
 //         <ul className="border-t border-border">
 //           {AWARDS.map((a) => (
@@ -711,7 +711,7 @@ function Contact() {
   }, []);
   return (
     <section id="contact" ref={sectionRef} className="relative overflow-hidden px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
-      {/* Ambient decorative asset â€” Untitled1 (organic blob, top-right) */}
+      {/* Ambient decorative asset- Untitled1 (organic blob, top-right) */}
       <svg
         aria-hidden
         viewBox="0 0 400 400"
@@ -732,7 +732,7 @@ function Contact() {
         <rect width="400" height="400" filter="url(#contact-blob-noise)" opacity="0.4" />
       </svg>
 
-      {/* Ambient decorative asset â€” Untitled2 (concentric arcs, bottom-left) */}
+      {/* Ambient decorative asset- Untitled2 (concentric arcs, bottom-left) */}
       <svg
         aria-hidden
         viewBox="0 0 400 400"
@@ -752,11 +752,11 @@ function Contact() {
             Open to <span className="text-serif-italic highlight-italic" data-hl="remote">remote</span> full-time roles and freelance engagements worldwide.
           </p>
           <p className="text-2xl leading-snug text-muted-foreground">
-            <span className="text-serif-italic text-foreground highlight-italic" data-hl="open">Open</span> to interesting collaborations â€” let's build AI-powered products that ship and scale.
+            <span className="text-serif-italic text-foreground highlight-italic" data-hl="open">Open</span> to interesting collaborations- let's build AI-powered products that ship and scale.
           </p>
         </div>
 
-        {/* Humble secondary CTA â€” quiet call-out */}
+        {/* Humble secondary CTA- quiet call-out */}
         <p className="mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
           Currently considering new projects and full-time roles <span className="text-serif-italic text-foreground highlight-italic" data-hl="q3-2026">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
         </p>
@@ -786,7 +786,7 @@ function Footer() {
     <footer className="border-t border-border px-6 py-10 sm:px-10">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 font-mono text-xs tracking-widest text-muted-foreground">
         <span>Â© 2026 {FIRST.toUpperCase()} {LAST.toUpperCase()}</span>
-        <span>{LOCATION.toUpperCase()} â€” {time} IST</span>
+        <span>{LOCATION.toUpperCase()}- {time} IST</span>
         <span>V1.0</span>
       </div>
     </footer>
