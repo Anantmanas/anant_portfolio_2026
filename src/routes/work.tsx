@@ -149,7 +149,9 @@ function WorkGrid() {
                   src={PROJECT_IMAGES[p.image!] ?? ""}
                   alt={p.name}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
                 />
               )}
               <div
@@ -194,7 +196,7 @@ function WorkGrid() {
 
       <div
         ref={previewRef}
-        className="pointer-events-none fixed left-0 top-0 z-40 hidden h-80 w-60 overflow-hidden rounded-sm shadow-2xl sm:block"
+        className="pointer-events-none fixed left-0 top-0 z-40 hidden aspect-[16/10] w-[260px] overflow-hidden rounded-sm shadow-2xl sm:block"
         style={{
           opacity: hovered !== null ? 1 : 0,
           transition: "opacity 300ms ease",
@@ -207,7 +209,9 @@ function WorkGrid() {
               <img
                 src={PROJECT_IMAGES[PROJECTS[hovered].image!] ?? ""}
                 alt={PROJECTS[hovered].name}
-                className="absolute inset-0 h-full w-full object-cover"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                style={{ objectFit: "cover", objectPosition: "center" }}
               />
             )}
             <div

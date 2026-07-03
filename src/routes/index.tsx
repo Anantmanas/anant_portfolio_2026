@@ -67,7 +67,7 @@ function SplitLetters({
             className={`letter-inner inline-block ${italic ? "text-serif-italic normal-case" : ""}`}
             style={{ willChange: "transform, opacity" }}
           >
-            {ch === " " ? " " : ch}
+            {ch === " " ? "Â " : ch}
           </span>
         </span>
       ))}
@@ -272,7 +272,7 @@ function Hero() {
         </h1>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-foreground/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="font-mono text-xs tracking-[0.2em] text-foreground/80">→ V1.0</div>
+          <div className="font-mono text-xs tracking-[0.2em] text-foreground/80">â†’ V1.0</div>
           <div className="flex flex-wrap items-start gap-x-6 gap-y-3 font-mono text-xs tracking-[0.2em] text-foreground/80">
             <a
               href="https://linkedin.com/in/anant-manas"
@@ -281,7 +281,7 @@ function Hero() {
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
-                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">â€º</span>
                 <span>LINKEDIN</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-[#0a66c2] transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
@@ -293,7 +293,7 @@ function Hero() {
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
-                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">â€º</span>
                 <span>GITHUB</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-foreground transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
@@ -303,7 +303,7 @@ function Hero() {
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
-                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">â€º</span>
                 <span>EMAIL</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
@@ -367,16 +367,16 @@ function About() {
       <div className="mx-auto grid max-w-6xl gap-12 sm:grid-cols-[1fr_1.2fr] sm:gap-20">
         <div className="relative">
           <img src={profileImg} alt="Portrait" width={768} height={960} loading="lazy" className="w-full grayscale aspect-[4/5] object-cover" />
-          <div className="absolute -bottom-3 left-0 font-mono text-[10px] tracking-widest text-muted-foreground">[ FIG. 01 — PORTRAIT ]</div>
+          <div className="absolute -bottom-3 left-0 font-mono text-[10px] tracking-widest text-muted-foreground">[ FIG. 01 â€” PORTRAIT ]</div>
         </div>
         <div className="flex flex-col justify-between gap-10">
           <p className="font-mono text-xs tracking-widest text-muted-foreground">(ABOUT)</p>
           <p className="text-2xl leading-snug sm:text-3xl">
-            My name is <span className="text-serif-italic text-accent-island">{FIRST}</span>. A Full Stack Engineer with 3+ years building AI-powered web applications on the MERN stack — RAG pipelines, AI agents, streaming responses, and polished React / Next.js frontends, shipped remote-first from {LOCATION}.
+            My name is <span className="text-serif-italic text-accent-island">{FIRST}</span>. A Full Stack Engineer with 3+ years building AI-powered web applications on the MERN stack â€” RAG pipelines, AI agents, streaming responses, and polished React / Next.js frontends, shipped remote-first from {LOCATION}.
           </p>
           <a href="#contact" className="group inline-flex items-center gap-3 self-start font-mono text-xs tracking-widest">
             <span>CONTACT</span>
-            <span className="text-accent transition-transform group-hover:translate-x-1">→</span>
+            <span className="text-accent transition-transform group-hover:translate-x-1">â†’</span>
           </a>
         </div>
       </div>
@@ -459,8 +459,8 @@ function Projects() {
     <section ref={sectionRef} id="work" className="relative px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 flex items-end justify-between">
-          <p className="font-mono text-xs tracking-widest text-muted-foreground">(SELECTED WORK · {PROJECTS.length})</p>
-          <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2021 — 2025</p>
+          <p className="font-mono text-xs tracking-widest text-muted-foreground">(SELECTED WORK Â· {PROJECTS.length})</p>
+          <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2021 â€” 2025</p>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
@@ -470,15 +470,18 @@ function Projects() {
               className={`proj-tile group relative overflow-hidden cursor-pointer border border-border/60 bg-foreground/5 ${layoutFor(i)}`}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
+              onClick={() => { if (p.url) window.open(p.url, "_blank", "noopener,noreferrer"); }}
             >
-              {/* Cover — gradient placeholder (fallback) + screenshot when available */}
+              {/* Cover â€” gradient placeholder (fallback) + screenshot when available */}
               <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient}`} />
               {p.image && (
                 <img
                   src={PROJECT_IMAGES[p.image!] ?? ""}
                   alt={p.name}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-105"
+                  style={{ objectFit: "cover", objectPosition: "center" }}
                 />
               )}
               {/* Grain overlay for editorial texture */}
@@ -494,13 +497,20 @@ function Projects() {
               <div className="absolute inset-0 bg-background/0 transition-colors duration-500 group-hover:bg-background/30" />
 
               {/* Top label row */}
-              <div className="absolute inset-x-0 top-0 flex items-start justify-between p-4 sm:p-6">
+              <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4 sm:p-6">
                 <span className="font-mono text-[10px] tracking-widest text-white/70">({p.id})</span>
-                <span className="font-mono text-[10px] tracking-widest text-white/70">{p.year}</span>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[10px] tracking-widest text-white/70">{p.year}</span>
+                  {p.url && (
+                    <span className="font-mono text-[10px] tracking-widest text-white/70 inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      LIVE <span className="text-accent">↗</span>
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Bottom title + meta (revealed on hover) */}
-              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+              <div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-6">
                 <h3 className="text-display text-3xl sm:text-5xl text-white leading-[0.95]">
                   {p.name}
                 </h3>
@@ -523,7 +533,7 @@ function Projects() {
       {/* Cursor-following high-fidelity preview */}
       <div
         ref={previewRef}
-        className="pointer-events-none fixed left-0 top-0 z-40 hidden h-80 w-60 overflow-hidden rounded-sm shadow-2xl sm:block"
+        className="pointer-events-none fixed left-0 top-0 z-40 hidden aspect-[16/10] w-[260px] overflow-hidden rounded-sm shadow-2xl sm:block "
         style={{
           opacity: hovered !== null ? 1 : 0,
           transition: "opacity 300ms ease",
@@ -536,7 +546,9 @@ function Projects() {
               <img
                 src={PROJECT_IMAGES[PROJECTS[hovered].image!] ?? ""}
                 alt={PROJECTS[hovered].name}
-                className="absolute inset-0 h-full w-full object-cover"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                style={{ objectFit: "cover", objectPosition: "center" }}
               />
             )}
             <div
@@ -576,7 +588,7 @@ function Skills() {
             Full Stack Engineer, specialized in AI-powered web apps, passionate about elegant interfaces and <span className="text-serif-italic">design</span>.
           </h2>
           <a href="#contact" className="group inline-flex w-fit items-center gap-3 font-mono text-xs tracking-widest">
-            CONTACT ME <span className="text-accent transition-transform group-hover:translate-x-1">✦</span>
+            CONTACT ME <span className="text-accent transition-transform group-hover:translate-x-1">âœ¦</span>
           </a>
         </div>
         <ul>
@@ -584,7 +596,7 @@ function Skills() {
             <li key={s.cat} className="border-b border-border">
               <button onClick={() => setOpen(open === i ? null : i)} className="flex w-full items-center justify-between py-6 text-left">
                 <span className="text-display text-2xl sm:text-4xl">{s.cat}</span>
-                <span className="font-mono text-2xl text-muted-foreground">{open === i ? "−" : "+"}</span>
+                <span className="font-mono text-2xl text-muted-foreground">{open === i ? "âˆ’" : "+"}</span>
               </button>
               <div className="grid overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
                 <div className="min-h-0 overflow-hidden">
@@ -633,8 +645,8 @@ function Skills() {
 //     <section ref={ref} id="awards" className="px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
 //       <div className="mx-auto max-w-6xl">
 //         <div className="mb-16 flex items-end justify-between">
-//           <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS · RECOGNITION)</p>
-//           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023 — 2025</p>
+//           <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS Â· RECOGNITION)</p>
+//           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023 â€” 2025</p>
 //         </div>
 //         <ul className="border-t border-border">
 //           {AWARDS.map((a) => (
@@ -645,11 +657,11 @@ function Skills() {
 //               <span className="font-mono text-xs text-muted-foreground tabular-nums">{a.year}</span>
 //               <div className="min-w-0">
 //                 <h3 className="text-display text-2xl leading-tight sm:text-4xl">
-//                   {a.title} <span className="text-serif-italic text-muted-foreground">— {a.org}</span>
+//                   {a.title} <span className="text-serif-italic text-muted-foreground">â€” {a.org}</span>
 //                 </h3>
 //                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground leading-relaxed">{a.note}</p>
 //               </div>
-//               <span className="font-mono text-[10px] tracking-widest text-muted-foreground sm:text-right">★ RECOGNISED</span>
+//               <span className="font-mono text-[10px] tracking-widest text-muted-foreground sm:text-right">â˜… RECOGNISED</span>
 //             </li>
 //           ))}
 //         </ul>
@@ -678,9 +690,28 @@ function Experience() {
 }
 
 function Contact() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const targets = el.querySelectorAll<HTMLElement>('[data-hl]');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('highlight-italic-sweep');
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.4, rootMargin: '0px 0px -10% 0px' },
+    );
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, []);
   return (
-    <section id="contact" className="relative overflow-hidden px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
-      {/* Ambient decorative asset — Untitled1 (organic blob, top-right) */}
+    <section id="contact" ref={sectionRef} className="relative overflow-hidden px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
+      {/* Ambient decorative asset â€” Untitled1 (organic blob, top-right) */}
       <svg
         aria-hidden
         viewBox="0 0 400 400"
@@ -701,7 +732,7 @@ function Contact() {
         <rect width="400" height="400" filter="url(#contact-blob-noise)" opacity="0.4" />
       </svg>
 
-      {/* Ambient decorative asset — Untitled2 (concentric arcs, bottom-left) */}
+      {/* Ambient decorative asset â€” Untitled2 (concentric arcs, bottom-left) */}
       <svg
         aria-hidden
         viewBox="0 0 400 400"
@@ -718,22 +749,22 @@ function Contact() {
         <p className="mb-16 font-mono text-xs tracking-widest text-muted-foreground">(CONTACT)</p>
         <div className="grid gap-12 sm:grid-cols-2">
           <p className="text-2xl leading-snug">
-            Open to <span className="text-serif-italic">remote</span> full-time roles and freelance engagements worldwide.
+            Open to <span className="text-serif-italic highlight-italic" data-hl="remote">remote</span> full-time roles and freelance engagements worldwide.
           </p>
           <p className="text-2xl leading-snug text-muted-foreground">
-            <span className="text-serif-italic text-foreground">Open</span> to interesting collaborations — let's build AI-powered products that ship and scale.
+            <span className="text-serif-italic text-foreground highlight-italic" data-hl="open">Open</span> to interesting collaborations â€” let's build AI-powered products that ship and scale.
           </p>
         </div>
 
-        {/* Humble secondary CTA — quiet call-out */}
+        {/* Humble secondary CTA â€” quiet call-out */}
         <p className="mt-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
-          Currently considering new projects and full-time roles <span className="text-serif-italic text-foreground">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
+          Currently considering new projects and full-time roles <span className="text-serif-italic text-foreground highlight-italic" data-hl="q3-2026">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
         </p>
 
         <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors hover:text-accent-island break-all">
           {EMAIL.split("@")[0]}<span className="text-serif-italic">@</span>{EMAIL.split("@")[1]}
         </a>
-        <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} · {LOCATION}</p>
+        <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} Â· {LOCATION}</p>
       </div>
     </section>
   );
@@ -754,8 +785,8 @@ function Footer() {
   return (
     <footer className="border-t border-border px-6 py-10 sm:px-10">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 font-mono text-xs tracking-widest text-muted-foreground">
-        <span>© 2026 {FIRST.toUpperCase()} {LAST.toUpperCase()}</span>
-        <span>{LOCATION.toUpperCase()} — {time} IST</span>
+        <span>Â© 2026 {FIRST.toUpperCase()} {LAST.toUpperCase()}</span>
+        <span>{LOCATION.toUpperCase()} â€” {time} IST</span>
         <span>V1.0</span>
       </div>
     </footer>
@@ -794,3 +825,5 @@ function Index() {
     </main>
   );
 }
+
+

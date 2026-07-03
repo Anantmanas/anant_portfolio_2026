@@ -1,3 +1,5 @@
 ollama launch claude --model minimax-m3:cloud
 
+ollama launch codex --model minimax-m3:cloud
+
  add this color highlight  effect on the contact section text including these classnames - <span className="text-serif-italic"> ex. remote, open, starting Q3 2026
