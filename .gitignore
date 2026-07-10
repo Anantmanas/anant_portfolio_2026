@@ -34,3 +34,8 @@ dist-ssr
 # Tooling local state
 .lovable/
 .claude/
+.qodo/
+.output/
+.tanstack/
+.wrangler/
+

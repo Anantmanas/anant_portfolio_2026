@@ -67,7 +67,7 @@ function SplitLetters({
             className={`letter-inner inline-block ${italic ? "text-serif-italic normal-case" : ""}`}
             style={{ willChange: "transform, opacity" }}
           >
-            {ch === " " ? "Â " : ch}
+            {ch === " " ? " " : ch}
           </span>
         </span>
       ))}

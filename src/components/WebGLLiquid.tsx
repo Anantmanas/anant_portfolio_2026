@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const VERTEX_SHADER = `
@@ -350,7 +350,13 @@ export function WebGLLiquid({
         "relative isolate min-h-svh w-full overflow-hidden bg-[#0b0100] text-foreground",
         className,
       )}
-      style={{ containerType: "size" }}
+      style={{
+        containerType: "size",
+        colorScheme: "dark",
+        "--foreground": "oklch(0.96 0 0)",
+        "--muted-foreground": "oklch(0.7 0 0)",
+        "--border": "oklch(0.4 0 0)",
+      } as CSSProperties}
     >
       {!hasWebGLError && (
         <canvas
