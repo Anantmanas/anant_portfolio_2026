@@ -272,7 +272,7 @@ function Hero() {
         </h1>
 
         <div className="mt-8 flex flex-col gap-4 border-t border-foreground/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="font-mono text-xs tracking-[0.2em] text-foreground/80">â†’ V1.0</div>
+          <div className="font-mono text-xs tracking-[0.2em] text-foreground/80">→ V1.0</div>
           <div className="flex flex-wrap items-start gap-x-6 gap-y-3 font-mono text-xs tracking-[0.2em] text-foreground/80">
             <a
               href="https://linkedin.com/in/anant-manas"
@@ -281,7 +281,7 @@ function Hero() {
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
-                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">â€º</span>
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
                 <span>LINKEDIN</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-[#0a66c2] transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
@@ -293,7 +293,7 @@ function Hero() {
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
-                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">â€º</span>
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
                 <span>GITHUB</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-foreground transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
@@ -303,7 +303,7 @@ function Hero() {
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
-                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">â€º</span>
+                <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
                 <span>EMAIL</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
@@ -376,7 +376,7 @@ function About() {
           </p>
           <a href="#contact" className="group inline-flex items-center gap-3 self-start font-mono text-xs tracking-widest">
             <span>CONTACT</span>
-            <span className="text-accent transition-transform group-hover:translate-x-1">â†’</span>
+            <span className="text-accent transition-transform group-hover:translate-x-1">→</span>
           </a>
         </div>
       </div>
@@ -459,7 +459,7 @@ function Projects() {
     <section ref={sectionRef} id="work" className="relative px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 flex items-end justify-between">
-          <p className="font-mono text-xs tracking-widest text-muted-foreground">(SELECTED WORK Â· {PROJECTS.length})</p>
+          <p className="font-mono text-xs tracking-widest text-muted-foreground">(SELECTED WORK · {PROJECTS.length})</p>
           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2021- 2025</p>
         </div>
 
@@ -588,7 +588,7 @@ function Skills() {
             Full Stack Engineer, specialized in AI-powered web apps, passionate about elegant interfaces and <span className="text-serif-italic">design</span>.
           </h2>
           <a href="#contact" className="group inline-flex w-fit items-center gap-3 font-mono text-xs tracking-widest">
-            CONTACT ME <span className="text-accent transition-transform group-hover:translate-x-1">âœ¦</span>
+            CONTACT ME <span className="text-accent transition-transform group-hover:translate-x-1">✦</span>
           </a>
         </div>
         <ul>
@@ -645,7 +645,7 @@ function Skills() {
 //     <section ref={ref} id="awards" className="px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
 //       <div className="mx-auto max-w-6xl">
 //         <div className="mb-16 flex items-end justify-between">
-//           <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS Â· RECOGNITION)</p>
+//           <p className="font-mono text-xs tracking-widest text-muted-foreground">(AWARDS · RECOGNITION)</p>
 //           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2023- 2025</p>
 //         </div>
 //         <ul className="border-t border-border">
@@ -657,7 +657,7 @@ function Skills() {
 //               <span className="font-mono text-xs text-muted-foreground tabular-nums">{a.year}</span>
 //               <div className="min-w-0">
 //                 <h3 className="text-display text-2xl leading-tight sm:text-4xl">
-//                   {a.title} <span className="text-serif-italic text-muted-foreground">â€” {a.org}</span>
+//                   {a.title} <span className="text-serif-italic text-muted-foreground">— {a.org}</span>
 //                 </h3>
 //                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground leading-relaxed">{a.note}</p>
 //               </div>
@@ -764,7 +764,7 @@ function Contact() {
         <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors hover:text-accent-island break-all">
           {EMAIL.split("@")[0]}<span className="text-serif-italic">@</span>{EMAIL.split("@")[1]}
         </a>
-        <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} Â· {LOCATION}</p>
+        <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} · {LOCATION}</p>
       </div>
     </section>
   );
