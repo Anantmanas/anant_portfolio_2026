@@ -10,6 +10,7 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    importFn: (path) => import(/* @vite-ignore */ path),
   });
 
   return router;

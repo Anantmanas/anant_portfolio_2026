@@ -1,5 +1,8 @@
-ollama launch claude --model minimax-m3:cloud
+ollama launch claude --model minimax-m3:cloud    //Resume this session with:
+claude --resume f7fa54ab-4ee5-455f-bd2f-3b9ab795ceae  
 
-ollama launch codex --model minimax-m3:cloud
+ollama launch codex --model minimax-m3:cloud             
 
- add this color highlight  effect on the contact section text including these classnames - <span className="text-serif-italic"> ex. remote, open, starting Q3 2026
+//Resume with -c (or command below): agy --conversation=44e43bf9-6547-43ec-af80-7b2c1684c70c                     
+
+add this color highlight  effect on the contact section text including these classnames - <span className="text-serif-italic"> ex. remote, open, starting Q3 2026

@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { GrainOverlay } from "../components/GrainOverlay";
 import { SmoothCursor } from "../components/ui/smooth-cursor";
 import { DynamicIsland } from "../components/ui/dynamic-island";
+import PortfolioChat from "../components/PortfolioChat";
 
 function NotFoundComponent() {
   return (
@@ -185,6 +186,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+        <PortfolioChat />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

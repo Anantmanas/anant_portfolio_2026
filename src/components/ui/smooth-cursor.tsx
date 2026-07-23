@@ -138,18 +138,15 @@ export function SmoothCursor({
   onCursorLeave,
   disabled = false,
 }: SmoothCursorProps) {
+  // SSR-safe defaults: mirror the values the server would compute so the
+  // first client render matches the SSR HTML. The effects below refine them
+  // post-mount to reflect the real environment.
   const [isMoving, setIsMoving] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isClicking, setIsClicking] = useState(false);
   const [trail, setTrail] = useState<Position[]>([]);
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof document === "undefined") return false;
-    return document.documentElement.classList.contains("dark");
-  });
-  const [shouldRender, setShouldRender] = useState<boolean>(() => {
-    if (typeof window === "undefined") return true;
-    return !window.matchMedia("(hover: none)").matches && window.innerWidth >= 768;
-  });
+  const [isDark, setIsDark] = useState<boolean>(false);
+  const [shouldRender, setShouldRender] = useState<boolean>(true);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -170,6 +167,7 @@ export function SmoothCursor({
   }, []);
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
     const sync = () =>
       setIsDark(document.documentElement.classList.contains("dark"));
     sync();
