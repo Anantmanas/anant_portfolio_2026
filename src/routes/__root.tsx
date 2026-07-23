@@ -15,7 +15,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { GrainOverlay } from "../components/GrainOverlay";
 import { SmoothCursor } from "../components/ui/smooth-cursor";
 import { DynamicIsland } from "../components/ui/dynamic-island";
-import PortfolioChat from "../components/PortfolioChat";
 
 function NotFoundComponent() {
   return (
@@ -114,14 +113,14 @@ function RootShell({ children }: { children: ReactNode }) {
   const isWork = pathname.startsWith("/work");
 
   const homeSections = [
-    { id: "top",        label: "Intro" },
-    { id: "manifesto",  label: "Manifesto" },
-    { id: "info",       label: "About" },
-    { id: "work",       label: "Work" },
-    { id: "skills",     label: "Skills" },
-    { id: "awards",     label: "Awards" },
+    { id: "top", label: "Intro" },
+    { id: "manifesto", label: "Manifesto" },
+    { id: "info", label: "About" },
+    { id: "work", label: "Work" },
+    { id: "skills", label: "Skills" },
+    { id: "awards", label: "Awards" },
     { id: "experience", label: "Experience" },
-    { id: "contact",    label: "Contact" },
+    { id: "contact", label: "Contact" },
   ];
   const workSections = [
     { id: "projects", label: "Projects" },
@@ -148,16 +147,16 @@ function RootShell({ children }: { children: ReactNode }) {
           darkBg="#0a0a0a"
           sections={isWork ? workSections : homeSections}
           fonts={[
-            { name: "Inter",  value: "Inter, sans-serif" },
-            { name: "Serif",  value: "'Instrument Serif', serif" },
-            { name: "Mono",   value: "'JetBrains Mono', monospace" },
+            { name: "Inter", value: "Inter, sans-serif" },
+            { name: "Serif", value: "'Instrument Serif', serif" },
+            { name: "Mono", value: "'JetBrains Mono', monospace" },
           ]}
           themes={[
             { name: "Crimson", color: "#cb0c11", color2: "#6f0000" },
             { name: "Midnight", color: "#0f172a", color2: "#1e293b" },
-            { name: "Emerald",  color: "#10b981", color2: "#34d399" },
-            { name: "Violet",   color: "#8b5cf6", color2: "#a78bfa" },
-            { name: "Sunset",   color: "#f97316", color2: "#fb923c" },
+            { name: "Emerald", color: "#10b981", color2: "#34d399" },
+            { name: "Violet", color: "#8b5cf6", color2: "#a78bfa" },
+            { name: "Sunset", color: "#f97316", color2: "#fb923c" },
           ]}
           showThemeToggle
           toggleAnimationType="diag-down-right"
@@ -186,9 +185,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-        <PortfolioChat />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
