@@ -43,7 +43,7 @@ Three Lightswind components live in the root shell:
 
 - `SmoothCursor` — a framer-motion `useSpring` pointer that follows with damping, rotates by velocity, scales on click, and emits a 5-dot trail. It watches `<html>`'s `class` for `.dark` and inverts its color (white in dark, charcoal in light) in real time. It is suppressed on coarse-pointer devices and viewports below 768px (`hover: none` media query + `resize` listener).
 - `DynamicIsland` — a fixed-position pill that surfaces scroll progress, the active section name, a font picker, a color-theme picker, and the theme toggle. The theme picker writes `--island-color` / `--island-color-2` to `<html>` for downstream CSS hookups; the toggle is a separate system that flips the `dark` class. Both persist to `localStorage`.
-- `ToggleTheme` — uses the browser View Transitions API with a 12-variant animation set (default `diag-down-right`). The default animation is a diagonal polygon wipe; the rest are spatial clips, morphs, flips, and waves.
+- `ToggleTheme` — uses the browser View Transitions API with a 12-variant animation set (default `diag-down-right`).
 
 **4. Theme system — token-driven, not class-stripped.**
 `styles.css` defines two token sets: `:root` (cool gray / charcoal light) and `.dark` (existing dark palette). The accent is shared across both. The grain overlay's `mix-blend-mode` switches from `overlay` (dark) to `multiply` (light) so the noise texture reads correctly on either ground. An inline script in `__root.tsx` reads `localStorage.theme` before hydration to prevent a flash of wrong theme.
