@@ -6,6 +6,8 @@ Personal portfolio project, I'm a creative full-stack developer. The site pairs 
 
 ---
 
+![Anant's Portfolio](./public/preview.jpeg)
+
 ## Stack
 
 | Layer          | Tool                                                                  | Notes                                                                                                                                           |
