@@ -3,11 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { PROJECTS, FIRST, LAST, EMAIL, LOCATION } from "@/lib/projects";
 import chatRoomImg from "@/assets/project_thumbnails/ChatRoom.jpeg";
 import promptEnhanceImg from "@/assets/project_thumbnails/promptenhance.png";
+import aiSaasImg from "@/assets/project_thumbnails/ai-saas.png";
 import creativeAgencyImg from "@/assets/project_thumbnails/CreativeAgency.jpeg";
 
 const PROJECT_IMAGES: Record<string, string> = {
   "ChatRoom.jpeg": chatRoomImg,
   "promptenhance.png": promptEnhanceImg,
+  "ai-saas.png": aiSaasImg,
   "CreativeAgency.jpeg": creativeAgencyImg,
 };
 
@@ -64,7 +66,7 @@ function WorkHeader() {
           </span>
         </h1>
         <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-          Three case studies — <span className="text-serif-italic text-foreground">AI tooling</span>, real-time apps, and editorial front-ends, shipped between 2024 and 2025.
+          Selected case studies — <span className="text-serif-italic text-foreground">AI tooling</span>, interview workflows, real-time apps, and editorial frontends, shipped between 2024 and 2025.
         </p>
       </div>
     </header>
@@ -124,18 +126,12 @@ function WorkGrid() {
     };
   }, []);
 
-  const layoutFor = (i: number) => {
-    const mod = i % 4;
-    if (mod === 0) return "sm:col-span-2 aspect-[16/9]";
-    if (mod === 1) return "sm:col-span-1 aspect-[4/5]";
-    if (mod === 2) return "sm:col-span-1 aspect-[4/5]";
-    return "sm:col-span-2 aspect-[21/9]";
-  };
+  const layoutFor = () => "sm:col-span-1 aspect-[5/4]";
 
   return (
     <section ref={sectionRef} id="projects" className="relative px-6 py-24 sm:px-10 sm:py-32">
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
           {PROJECTS.map((p, i) => (
             <article
               key={p.id}

@@ -1,8 +1,9 @@
-﻿import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import profileImg from "@/assets/profile.jpg";
 import chatRoomImg from "@/assets/project_thumbnails/ChatRoom.jpeg";
 import promptEnhanceImg from "@/assets/project_thumbnails/promptenhance.png";
+import aiSaasImg from "@/assets/project_thumbnails/ai-saas.png";
 import creativeAgencyImg from "@/assets/project_thumbnails/CreativeAgency.jpeg";
 import { WebGLLiquid } from "@/components/WebGLLiquid";
 import {
@@ -387,6 +388,7 @@ function About() {
 const PROJECT_IMAGES: Record<string, string> = {
   "ChatRoom.jpeg": chatRoomImg,
   "promptenhance.png": promptEnhanceImg,
+  "ai-saas.png": aiSaasImg,
   "CreativeAgency.jpeg": creativeAgencyImg,
 };
 
@@ -446,14 +448,8 @@ function Projects() {
     };
   }, []);
 
-  // Editorial grid: alternating sizes for visual rhythm
-  const layoutFor = (i: number) => {
-    const mod = i % 4;
-    if (mod === 0) return "sm:col-span-2 aspect-[16/9]";   // full width, wide
-    if (mod === 1) return "sm:col-span-1 aspect-[4/5]";    // half, tall
-    if (mod === 2) return "sm:col-span-1 aspect-[4/5]";    // half, tall
-    return "sm:col-span-2 aspect-[21/9]";                   // full width, ultrawide
-  };
+  // Compact boxed grid for consistent rows and columns
+  const layoutFor = () => "sm:col-span-1 aspect-[5/4]";
 
   return (
     <section ref={sectionRef} id="work" className="relative px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
@@ -463,7 +459,7 @@ function Projects() {
           <p className="hidden font-mono text-xs tracking-widest text-muted-foreground sm:block">2021- 2025</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
           {PROJECTS.map((p, i) => (
             <article
               key={p.id}
@@ -596,7 +592,7 @@ function Skills() {
             <li key={s.cat} className="border-b border-border">
               <button onClick={() => setOpen(open === i ? null : i)} className="flex w-full items-center justify-between py-6 text-left">
                 <span className="text-display text-2xl sm:text-4xl">{s.cat}</span>
-                <span className="font-mono text-2xl text-muted-foreground">{open === i ? "âˆ’" : "+"}</span>
+                <span className="font-mono text-2xl text-muted-foreground">{open === i ? "-" : "+"}</span>
               </button>
               <div className="grid overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" style={{ gridTemplateRows: open === i ? "1fr" : "0fr" }}>
                 <div className="min-h-0 overflow-hidden">
@@ -661,7 +657,7 @@ function Skills() {
 //                 </h3>
 //                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground leading-relaxed">{a.note}</p>
 //               </div>
-//               <span className="font-mono text-[10px] tracking-widest text-muted-foreground sm:text-right">â˜… RECOGNISED</span>
+//               <span className="font-mono text-[10px] tracking-widest text-muted-foreground sm:text-right">★ RECOGNISED</span>
 //             </li>
 //           ))}
 //         </ul>
@@ -785,7 +781,7 @@ function Footer() {
   return (
     <footer className="border-t border-border px-6 py-10 sm:px-10">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 font-mono text-xs tracking-widest text-muted-foreground">
-        <span>Â© 2026 {FIRST.toUpperCase()} {LAST.toUpperCase()}</span>
+        <span>© 2026 {FIRST.toUpperCase()} {LAST.toUpperCase()}</span>
         <span>{LOCATION.toUpperCase()}- {time} IST</span>
         <span>V1.0</span>
       </div>

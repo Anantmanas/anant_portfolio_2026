@@ -37,6 +37,18 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "03",
+    name: "AI Interview Prep",
+    type: "Interview prep SaaS",
+    year: "2025",
+    stack: "React · Next.js · TypeScript · OpenAI",
+    gradient: "from-[#0d2a3d] via-[#08131e] to-black",
+    image: "ai-saas.png",
+    url: "http://ai-prep-saas-pied.vercel.app/",
+    description:
+      "Technical interview prep platform with mock interviews, audio transcription, and instant scoring feedback via streaming OpenAI evaluation.",
+  },
+  {
+    id: "04",
     name: "Creative Agency",
     type: "Animated portfolio",
     year: "2024",
