@@ -191,7 +191,14 @@ export function WebGLLiquid({
     let cleanupGl: (() => void) | null = null;
 
     try {
-      const gl = canvas.getContext("webgl", { antialias: true, alpha: true });
+      const gl = canvas.getContext("webgl", {
+        alpha: false,
+        depth: false,
+        stencil: false,
+        antialias: false,
+        powerPreference: "high-performance",
+        desynchronized: true,
+      });
       if (!gl) {
         setHasWebGLError(true);
         return;
