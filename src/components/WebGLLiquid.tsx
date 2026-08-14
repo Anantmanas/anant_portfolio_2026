@@ -9,7 +9,7 @@ void main() {
 `;
 
 const FRAGMENT_SHADER = `
-precision highp float;
+precision mediump float;
 
 uniform vec2 u_res;
 uniform float u_time;
@@ -197,7 +197,7 @@ export function WebGLLiquid({
         stencil: false,
         antialias: false,
         powerPreference: "high-performance",
-        desynchronized: true,
+        desynchronized: false,
       });
       if (!gl) {
         setHasWebGLError(true);
@@ -289,10 +289,11 @@ export function WebGLLiquid({
       }
 
       const resize = () => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const { width, height } = host.getBoundingClientRect();
-        canvas.width = Math.max(1, Math.floor(width * dpr));
-        canvas.height = Math.max(1, Math.floor(height * dpr));
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+        const width = Math.max(1, Math.floor(window.innerWidth * dpr));
+        const height = Math.max(1, Math.floor((host.clientHeight || window.innerHeight) * dpr));
+        canvas.width = width;
+        canvas.height = height;
         gl.viewport(0, 0, canvas.width, canvas.height);
         gl.uniform2f(uRes, canvas.width, canvas.height);
       };
@@ -303,6 +304,11 @@ export function WebGLLiquid({
 
       const start = performance.now();
       const render = (now: number) => {
+        if (document.hidden) {
+          rafId = requestAnimationFrame(render);
+          return;
+        }
+
         const elapsedSec = Math.max(0, (now - start - settings.delayMs) / 1000);
         const revealProgress = settings.reveal
           ? Math.min(1, elapsedSec / Math.max(settings.revealDuration, 0.05))
@@ -330,10 +336,18 @@ export function WebGLLiquid({
         rafId = requestAnimationFrame(render);
       };
 
+      const handleVisibilityChange = () => {
+        if (!document.hidden) {
+          rafId = requestAnimationFrame(render);
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
       rafId = requestAnimationFrame(render);
 
       cleanupGl = () => {
         cancelAnimationFrame(rafId);
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
         resizeObserver?.disconnect();
         gl.deleteBuffer(quadBuffer);
         gl.deleteProgram(program);
@@ -358,6 +372,9 @@ export function WebGLLiquid({
         className,
       )}
       style={{
+        contain: "strict",
+        willChange: "transform",
+        transform: "translateZ(0)",
         containerType: "size",
         colorScheme: "dark",
         "--foreground": "oklch(0.96 0 0)",
@@ -370,7 +387,15 @@ export function WebGLLiquid({
           ref={canvasRef}
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full"
-          style={{ width: "100%", height: "100%", display: "block" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "block",
+            contain: "strict",
+            willChange: "transform",
+            transform: "translateZ(0)",
+            pointerEvents: "none",
+          }}
         />
       )}
 
