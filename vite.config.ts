@@ -1,6 +1,6 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-export default defineConfig({
+const lovableConfig = defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
@@ -14,20 +14,34 @@ export default defineConfig({
     resolve: {
       tsconfigPaths: true,
     },
-    build: {
-      rolldownOptions: {
-        output: {
-          codeSplitting: {
-            groups: [
-              {
-                name: "vendor",
-                test: /node_modules/,
-                maxSize: 250 * 1024,
+    environments: {
+      client: {
+        build: {
+          rolldownOptions: {
+            output: {
+              codeSplitting: {
+                groups: [
+                  {
+                    name: "vendor",
+                    test: /node_modules/,
+                    maxSize: 250 * 1024,
+                  },
+                ],
               },
-            ],
+            },
           },
         },
       },
     },
   }
 });
+
+export default async (env) => {
+  const config = await lovableConfig(env);
+  return {
+    ...config,
+    plugins: config.plugins?.filter(
+      (plugin) => !(typeof plugin === "object" && plugin && "name" in plugin && plugin.name === "vite-tsconfig-paths"),
+    ),
+  };
+};
