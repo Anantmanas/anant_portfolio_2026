@@ -14,25 +14,6 @@ const lovableConfig = defineConfig({
     resolve: {
       tsconfigPaths: true,
     },
-    environments: {
-      client: {
-        build: {
-          rolldownOptions: {
-            output: {
-              codeSplitting: {
-                groups: [
-                  {
-                    name: "vendor",
-                    test: /node_modules/,
-                    maxSize: 250 * 1024,
-                  },
-                ],
-              },
-            },
-          },
-        },
-      },
-    },
   }
 });
 
