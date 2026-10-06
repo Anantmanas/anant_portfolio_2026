@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import profileImg from "@/assets/profile.jpg";
-import chatRoomImg from "@/assets/project_thumbnails/ChatRoom.jpeg";
+import { ContactForm } from "@/components/ContactForm";
+import interviewAiImg from "@/assets/project_thumbnails/InterviewAI.png";
 import promptEnhanceImg from "@/assets/project_thumbnails/promptenhance.png";
 import aiSaasImg from "@/assets/project_thumbnails/ai-saas.png";
 import creativeAgencyImg from "@/assets/project_thumbnails/CreativeAgency.jpeg";
@@ -12,7 +13,6 @@ import {
   EXPERIENCE,
   FIRST,
   LAST,
-  EMAIL,
   LOCATION,
   PHONE,
 } from "@/lib/projects";
@@ -300,12 +300,12 @@ function Hero() {
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-foreground transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
             </a>
             <a
-              href={`mailto:${EMAIL}`}
+              href="#contact-form"
               className="group inline-flex flex-col items-start font-medium text-foreground/85 transition-colors duration-300 hover:text-foreground"
             >
               <span className="inline-flex items-center gap-1.5">
                 <span className="text-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-foreground/80">›</span>
-                <span>EMAIL</span>
+                <span>CONTACT</span>
               </span>
               <span className="mt-1 block h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.7,0,0.2,1)] group-hover:scale-x-100" />
             </a>
@@ -386,7 +386,7 @@ function About() {
 }
 
 const PROJECT_IMAGES: Record<string, string> = {
-  "ChatRoom.jpeg": chatRoomImg,
+  "InterviewAI.png": interviewAiImg,
   "promptenhance.png": promptEnhanceImg,
   "ai-saas.png": aiSaasImg,
   "CreativeAgency.jpeg": creativeAgencyImg,
@@ -449,7 +449,7 @@ function Projects() {
   }, []);
 
   // Compact boxed grid for consistent rows and columns
-  const layoutFor = () => "sm:col-span-1 aspect-[5/4]";
+  const layoutFor = (_index: number) => "sm:col-span-1 aspect-[5/4]";
 
   return (
     <section ref={sectionRef} id="work" className="relative px-6 py-24 sm:px-10 sm:py-32 border-t border-border">
@@ -757,9 +757,6 @@ function Contact() {
           Currently considering new projects and full-time roles <span className="text-serif-italic text-foreground highlight-italic" data-hl="q3-2026">starting Q3 2026</span>. Happy to chat through scope, timing, or ideas.
         </p>
 
-        <a href={`mailto:${EMAIL}`} className="mt-16 block text-display text-[8vw] sm:text-[6vw] leading-none transition-colors hover:text-accent-island break-all">
-          {EMAIL.split("@")[0]}<span className="text-serif-italic">@</span>{EMAIL.split("@")[1]}
-        </a>
         <p className="mt-6 font-mono text-xs tracking-widest text-muted-foreground">{PHONE} · {LOCATION}</p>
       </div>
     </section>
@@ -817,6 +814,7 @@ function Index() {
       {/* <Awards /> */}
       <Experience />
       <Contact />
+      <ContactForm />
       <Footer />
     </main>
   );

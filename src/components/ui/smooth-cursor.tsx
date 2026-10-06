@@ -46,9 +46,10 @@ export interface SmoothCursorProps {
   disabled?: boolean;
 }
 
-const DefaultCursorSVG: FC<{ size?: number; color?: string; className?: string }> = ({
+const DefaultCursorSVG: FC<{ size?: number; color?: string; strokeColor?: string; className?: string }> = ({
   size = 25,
   color = "black",
+  strokeColor = "white",
   className
 }) => {
   return (
@@ -67,7 +68,7 @@ const DefaultCursorSVG: FC<{ size?: number; color?: string; className?: string }
         />
         <path
           d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z"
-          stroke="white"
+          stroke={strokeColor}
           strokeWidth={2.25825}
         />
       </g>
@@ -146,6 +147,7 @@ export function SmoothCursor({
   const [isClicking, setIsClicking] = useState(false);
   const [trail, setTrail] = useState<Position[]>([]);
   const [isDark, setIsDark] = useState<boolean>(false);
+  const [isContactSubmitHovered, setIsContactSubmitHovered] = useState(false);
   const [shouldRender, setShouldRender] = useState<boolean>(true);
 
   useEffect(() => {
@@ -200,7 +202,7 @@ export function SmoothCursor({
     damping: 35,
   });
 
-  const defaultCursor = <DefaultCursorSVG size={size} color={resolvedColor} />;
+  const defaultCursor = <DefaultCursorSVG size={size} color={isContactSubmitHovered ? "var(--background)" : resolvedColor} strokeColor={isContactSubmitHovered ? "var(--foreground)" : "white"} />;
   const cursorElement = cursor || defaultCursor;
 
   useEffect(() => {
@@ -335,6 +337,9 @@ export function SmoothCursor({
 
     document.body.style.cursor = "none";
     window.addEventListener("mousemove", throttledMouseMove);
+    const syncContactSubmitHover = (event: MouseEvent) =>
+      setIsContactSubmitHovered(Boolean((event.target as Element | null)?.closest("[data-contact-submit]")));
+    window.addEventListener("mouseover", syncContactSubmitHover);
     document.addEventListener("mouseenter", handleMouseEnter);
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mousedown", handleMouseDown);
@@ -342,6 +347,7 @@ export function SmoothCursor({
 
     return () => {
       window.removeEventListener("mousemove", throttledMouseMove);
+      window.removeEventListener("mouseover", syncContactSubmitHover);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mousedown", handleMouseDown);

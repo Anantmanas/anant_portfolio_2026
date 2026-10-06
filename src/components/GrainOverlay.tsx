@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 
 const TILE_SIZE = 220;
 const ALPHA = 22;
-const FRAME_MS = 60;
 
 function paintFrame(ctx: CanvasRenderingContext2D, size: number) {
   const img = ctx.createImageData(size, size);
@@ -28,14 +27,7 @@ export function GrainOverlay() {
 
     canvas.width = TILE_SIZE;
     canvas.height = TILE_SIZE;
-
     paintFrame(ctx, TILE_SIZE);
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    const id = window.setInterval(() => paintFrame(ctx, TILE_SIZE), FRAME_MS);
-    return () => window.clearInterval(id);
   }, []);
 
   return (

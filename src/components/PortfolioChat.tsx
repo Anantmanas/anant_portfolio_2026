@@ -100,7 +100,6 @@ const PortfolioChat = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          to: "anantmanas101@gmail.com",
           sender: formEmail,
           message: formMessage,
         }),

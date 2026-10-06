@@ -189,176 +189,213 @@ export function WebGLLiquid({
     let rafId = 0;
     let resizeObserver: ResizeObserver | null = null;
     let cleanupGl: (() => void) | null = null;
+    let cancelled = false;
+    let isVisible = !document.hidden;
 
-    try {
-      const gl = canvas.getContext("webgl", {
-        alpha: false,
-        depth: false,
-        stencil: false,
-        antialias: false,
-        powerPreference: "high-performance",
-        desynchronized: false,
-      });
-      if (!gl) {
-        setHasWebGLError(true);
-        return;
-      }
-
-      const compileShader = (type: number, source: string) => {
-        const shader = gl.createShader(type);
-        if (!shader) return null;
-        gl.shaderSource(shader, source);
-        gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-          gl.deleteShader(shader);
-          return null;
-        }
-        return shader;
-      };
-
-      const vertexShader = compileShader(gl.VERTEX_SHADER, VERTEX_SHADER);
-      const fragmentShader = compileShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
-      if (!vertexShader || !fragmentShader) {
-        setHasWebGLError(true);
-        return;
-      }
-
-      const program = gl.createProgram();
-      if (!program) {
-        gl.deleteShader(vertexShader);
-        gl.deleteShader(fragmentShader);
-        setHasWebGLError(true);
-        return;
-      }
-
-      gl.attachShader(program, vertexShader);
-      gl.attachShader(program, fragmentShader);
-      gl.linkProgram(program);
-      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        gl.deleteProgram(program);
-        gl.deleteShader(vertexShader);
-        gl.deleteShader(fragmentShader);
-        setHasWebGLError(true);
-        return;
-      }
-
-      gl.useProgram(program);
-
-      const positionLocation = gl.getAttribLocation(program, "position");
-      const quadBuffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-        gl.STATIC_DRAW,
-      );
-      gl.enableVertexAttribArray(positionLocation);
-      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-      const uRes = gl.getUniformLocation(program, "u_res");
-      const uTime = gl.getUniformLocation(program, "u_time");
-      const uColorDeep = gl.getUniformLocation(program, "u_colorDeep");
-      const uColorMid = gl.getUniformLocation(program, "u_colorMid");
-      const uColorHighlight = gl.getUniformLocation(program, "u_colorHighlight");
-      const uSpeed = gl.getUniformLocation(program, "u_speed");
-      const uFlowStrength = gl.getUniformLocation(program, "u_flowStrength");
-      const uGrain = gl.getUniformLocation(program, "u_grain");
-      const uContrast = gl.getUniformLocation(program, "u_contrast");
-      const uOpacity = gl.getUniformLocation(program, "u_opacity");
-      const uReveal = gl.getUniformLocation(program, "u_reveal");
-
-      if (
-        !uRes ||
-        !uTime ||
-        !uColorDeep ||
-        !uColorMid ||
-        !uColorHighlight ||
-        !uSpeed ||
-        !uFlowStrength ||
-        !uGrain ||
-        !uContrast ||
-        !uOpacity ||
-        !uReveal
-      ) {
-        gl.deleteBuffer(quadBuffer);
-        gl.deleteProgram(program);
-        gl.deleteShader(vertexShader);
-        gl.deleteShader(fragmentShader);
-        setHasWebGLError(true);
-        return;
-      }
-
-      const resize = () => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
-        const width = Math.max(1, Math.floor(window.innerWidth * dpr));
-        const height = Math.max(1, Math.floor((host.clientHeight || window.innerHeight) * dpr));
-        canvas.width = width;
-        canvas.height = height;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-        gl.uniform2f(uRes, canvas.width, canvas.height);
-      };
-
-      resize();
-      resizeObserver = new ResizeObserver(resize);
-      resizeObserver.observe(host);
-
-      const start = performance.now();
-      const render = (now: number) => {
-        if (document.hidden) {
-          rafId = requestAnimationFrame(render);
+    const start = () => {
+      try {
+        const gl = canvas.getContext("webgl", {
+          alpha: false,
+          depth: false,
+          stencil: false,
+          antialias: false,
+          powerPreference: "high-performance",
+          desynchronized: false,
+        });
+        if (!gl) {
+          setHasWebGLError(true);
           return;
         }
 
-        const elapsedSec = Math.max(0, (now - start - settings.delayMs) / 1000);
-        const revealProgress = settings.reveal
-          ? Math.min(1, elapsedSec / Math.max(settings.revealDuration, 0.05))
-          : 1;
+        const compileShader = (type: number, source: string) => {
+          const shader = gl.createShader(type);
+          if (!shader) return null;
+          gl.shaderSource(shader, source);
+          gl.compileShader(shader);
+          if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            gl.deleteShader(shader);
+            return null;
+          }
+          return shader;
+        };
+
+        const vertexShader = compileShader(gl.VERTEX_SHADER, VERTEX_SHADER);
+        const fragmentShader = compileShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
+        if (!vertexShader || !fragmentShader) {
+          setHasWebGLError(true);
+          return;
+        }
+
+        const program = gl.createProgram();
+        if (!program) {
+          gl.deleteShader(vertexShader);
+          gl.deleteShader(fragmentShader);
+          setHasWebGLError(true);
+          return;
+        }
+
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          gl.deleteProgram(program);
+          gl.deleteShader(vertexShader);
+          gl.deleteShader(fragmentShader);
+          setHasWebGLError(true);
+          return;
+        }
+
+        gl.useProgram(program);
+
+        const positionLocation = gl.getAttribLocation(program, "position");
+        const quadBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+          gl.STATIC_DRAW,
+        );
+        gl.enableVertexAttribArray(positionLocation);
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+        const uRes = gl.getUniformLocation(program, "u_res");
+        const uTime = gl.getUniformLocation(program, "u_time");
+        const uColorDeep = gl.getUniformLocation(program, "u_colorDeep");
+        const uColorMid = gl.getUniformLocation(program, "u_colorMid");
+        const uColorHighlight = gl.getUniformLocation(program, "u_colorHighlight");
+        const uSpeed = gl.getUniformLocation(program, "u_speed");
+        const uFlowStrength = gl.getUniformLocation(program, "u_flowStrength");
+        const uGrain = gl.getUniformLocation(program, "u_grain");
+        const uContrast = gl.getUniformLocation(program, "u_contrast");
+        const uOpacity = gl.getUniformLocation(program, "u_opacity");
+        const uReveal = gl.getUniformLocation(program, "u_reveal");
+
+        if (
+          !uRes ||
+          !uTime ||
+          !uColorDeep ||
+          !uColorMid ||
+          !uColorHighlight ||
+          !uSpeed ||
+          !uFlowStrength ||
+          !uGrain ||
+          !uContrast ||
+          !uOpacity ||
+          !uReveal
+        ) {
+          gl.deleteBuffer(quadBuffer);
+          gl.deleteProgram(program);
+          gl.deleteShader(vertexShader);
+          gl.deleteShader(fragmentShader);
+          setHasWebGLError(true);
+          return;
+        }
+
+        // DPR cap: 1.0 keeps the fragment shader cost roughly proportional to
+        // logical pixels instead of growing ~1.5x on retina. Visual loss is
+        // imperceptible behind a vignette + grain + reveal mask.
+        const resize = () => {
+          const dpr = Math.min(window.devicePixelRatio || 1, 1);
+          const width = Math.max(1, Math.floor(window.innerWidth * dpr));
+          const height = Math.max(1, Math.floor((host.clientHeight || window.innerHeight) * dpr));
+          canvas.width = width;
+          canvas.height = height;
+          gl.viewport(0, 0, canvas.width, canvas.height);
+          gl.uniform2f(uRes, canvas.width, canvas.height);
+        };
+
+        resize();
+        resizeObserver = new ResizeObserver(resize);
+        resizeObserver.observe(host);
 
         const deep = hexToRgb01(settings.colorDeep);
         const mid = hexToRgb01(settings.colorMid);
         const highlight = hexToRgb01(settings.colorHighlight);
 
-        gl.clearColor(0, 0, 0, 0);
-        gl.clear(gl.COLOR_BUFFER_BIT);
+        // Throttle the render loop to ~30 FPS. The shader's organic motion
+        // is on a 0.14s unit clock, so 30Hz is still smooth to the eye but
+        // cuts main-thread + GPU cost in half. Hidden tabs are fully paused
+        // and resumed on visibilitychange.
+        const FRAME_MS = 33;
+        const t0 = performance.now();
+        let lastFrame = 0;
 
-        gl.uniform1f(uTime, elapsedSec);
-        gl.uniform3f(uColorDeep, deep[0], deep[1], deep[2]);
-        gl.uniform3f(uColorMid, mid[0], mid[1], mid[2]);
-        gl.uniform3f(uColorHighlight, highlight[0], highlight[1], highlight[2]);
-        gl.uniform1f(uSpeed, settings.speed);
-        gl.uniform1f(uFlowStrength, settings.flowStrength);
-        gl.uniform1f(uGrain, settings.grain);
-        gl.uniform1f(uContrast, settings.contrast);
-        gl.uniform1f(uOpacity, settings.opacity);
-        gl.uniform1f(uReveal, revealProgress);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        const render = (now: number) => {
+          if (cancelled) return;
+          if (!isVisible) {
+            return;
+          }
+          if (now - lastFrame < FRAME_MS) {
+            rafId = requestAnimationFrame(render);
+            return;
+          }
+          lastFrame = now;
 
-        rafId = requestAnimationFrame(render);
-      };
+          const elapsedSec = Math.max(0, (now - t0 - settings.delayMs) / 1000);
+          const revealProgress = settings.reveal
+            ? Math.min(1, elapsedSec / Math.max(settings.revealDuration, 0.05))
+            : 1;
 
-      const handleVisibilityChange = () => {
-        if (!document.hidden) {
+          gl.clearColor(0, 0, 0, 0);
+          gl.clear(gl.COLOR_BUFFER_BIT);
+
+          gl.uniform1f(uTime, elapsedSec);
+          gl.uniform3f(uColorDeep, deep[0], deep[1], deep[2]);
+          gl.uniform3f(uColorMid, mid[0], mid[1], mid[2]);
+          gl.uniform3f(uColorHighlight, highlight[0], highlight[1], highlight[2]);
+          gl.uniform1f(uSpeed, settings.speed);
+          gl.uniform1f(uFlowStrength, settings.flowStrength);
+          gl.uniform1f(uGrain, settings.grain);
+          gl.uniform1f(uContrast, settings.contrast);
+          gl.uniform1f(uOpacity, settings.opacity);
+          gl.uniform1f(uReveal, revealProgress);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
           rafId = requestAnimationFrame(render);
-        }
-      };
+        };
 
-      document.addEventListener("visibilitychange", handleVisibilityChange);
-      rafId = requestAnimationFrame(render);
+        const handleVisibilityChange = () => {
+          if (cancelled) return;
+          isVisible = !document.hidden;
+          if (isVisible) {
+            lastFrame = 0; // avoid huge dt spike
+            rafId = requestAnimationFrame(render);
+          } else if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = 0;
+          }
+        };
 
-      cleanupGl = () => {
-        cancelAnimationFrame(rafId);
-        document.removeEventListener("visibilitychange", handleVisibilityChange);
-        resizeObserver?.disconnect();
-        gl.deleteBuffer(quadBuffer);
-        gl.deleteProgram(program);
-        gl.deleteShader(vertexShader);
-        gl.deleteShader(fragmentShader);
-      };
-    } catch {
-      setHasWebGLError(true);
+        document.addEventListener("visibilitychange", handleVisibilityChange, { passive: true });
+        rafId = requestAnimationFrame(render);
+
+        cleanupGl = () => {
+          cancelled = true;
+          cancelAnimationFrame(rafId);
+          document.removeEventListener("visibilitychange", handleVisibilityChange);
+          resizeObserver?.disconnect();
+          gl.deleteBuffer(quadBuffer);
+          gl.deleteProgram(program);
+          gl.deleteShader(vertexShader);
+          gl.deleteShader(fragmentShader);
+        };
+      } catch {
+        setHasWebGLError(true);
+      }
+    };
+
+    // Defer WebGL init to the next idle slot so it never competes with the
+    // initial paint / hero text render. The visual is hidden behind the
+    // preloader anyway, so deferring is purely a perf win.
+    const ric = (window as unknown as { requestIdleCallback?: (c: () => void) => number }).requestIdleCallback;
+    if (typeof ric === "function") {
+      ric(() => { if (!cancelled) start(); });
+    } else {
+      setTimeout(() => { if (!cancelled) start(); }, 200);
     }
 
     return () => {
+      cancelled = true;
       cleanupGl?.();
     };
   }, [hasWebGLError, settings]);
@@ -372,10 +409,7 @@ export function WebGLLiquid({
         className,
       )}
       style={{
-        contain: "strict",
-        willChange: "transform",
-        transform: "translateZ(0)",
-        containerType: "size",
+        contain: "layout paint",
         colorScheme: "dark",
         "--foreground": "oklch(0.96 0 0)",
         "--muted-foreground": "oklch(0.7 0 0)",
@@ -392,8 +426,6 @@ export function WebGLLiquid({
             height: "100%",
             display: "block",
             contain: "strict",
-            willChange: "transform",
-            transform: "translateZ(0)",
             pointerEvents: "none",
           }}
         />

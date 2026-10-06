@@ -15,6 +15,8 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+.env
+.env.*
 
 # Wrangler / Cloudflare
 .wrangler/
@@ -41,3 +43,6 @@ dist-ssr
 
 *.md
 !README.md
+
+*storybook.log
+storybook-static

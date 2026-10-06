@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { PROJECTS, FIRST, LAST, EMAIL, LOCATION } from "@/lib/projects";
-import chatRoomImg from "@/assets/project_thumbnails/ChatRoom.jpeg";
+import { PROJECTS, FIRST, LAST, LOCATION } from "@/lib/projects";
+import interviewAiImg from "@/assets/project_thumbnails/InterviewAI.png";
 import promptEnhanceImg from "@/assets/project_thumbnails/promptenhance.png";
 import aiSaasImg from "@/assets/project_thumbnails/ai-saas.png";
 import creativeAgencyImg from "@/assets/project_thumbnails/CreativeAgency.jpeg";
 
 const PROJECT_IMAGES: Record<string, string> = {
-  "ChatRoom.jpeg": chatRoomImg,
+  "InterviewAI.png": interviewAiImg,
   "promptenhance.png": promptEnhanceImg,
   "ai-saas.png": aiSaasImg,
   "CreativeAgency.jpeg": creativeAgencyImg,
@@ -126,7 +126,7 @@ function WorkGrid() {
     };
   }, []);
 
-  const layoutFor = () => "sm:col-span-1 aspect-[5/4]";
+  const layoutFor = (_index: number) => "sm:col-span-1 aspect-[5/4]";
 
   return (
     <section ref={sectionRef} id="projects" className="relative px-6 py-24 sm:px-10 sm:py-32">
@@ -249,7 +249,6 @@ function WorkFooter() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 font-mono text-xs tracking-widest text-muted-foreground">
         <Link to="/" className="hover:text-foreground transition-colors">© 2026 {FIRST.toUpperCase()} {LAST.toUpperCase()}</Link>
         <span>{LOCATION.toUpperCase()} — {time} IST</span>
-        <Link to={`mailto:${EMAIL}`} className="hover:text-foreground transition-colors">{EMAIL}</Link>
       </div>
     </footer>
   );

@@ -13,13 +13,13 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     id: "01",
-    name: "ChatRoom",
+    name: "InterviewAI - Next.js",
     type: "AI-powered chat app",
     year: "2025",
     stack: "MERN · Socket.IO · Gorq SDK",
     gradient: "from-[#3d1f1f] via-[#1f0d0d] to-black",
-    image: "ChatRoom.jpeg",
-    url: "https://mernfront-agkd.onrender.com/",
+    image: "InterviewAI.png",
+    url: "https://ai-interview-app-virid.vercel.app/",
     description:
       "Real-time multi-room chat with streaming LLM responses, RAG over conversation history, and tool-using AI agents.",
   },
@@ -84,6 +84,5 @@ export const AWARDS = [
 
 export const FIRST = "Anant";
 export const LAST = "Manas";
-export const EMAIL = "anantmanas101@gmail.com";
 export const LOCATION = "Kanpur, IN";
 export const PHONE = "+91 79051 34232";
