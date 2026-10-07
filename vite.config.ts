@@ -1,4 +1,5 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import type { ConfigEnv } from "vite";
 
 const lovableConfig = defineConfig({
   nitro: {
@@ -20,7 +21,7 @@ const lovableConfig = defineConfig({
   }
 });
 
-export default async (env) => {
+export default async (env: ConfigEnv) => {
   const config = await lovableConfig(env);
   return {
     ...config,

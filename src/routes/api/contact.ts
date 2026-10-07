@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { existsSync } from "node:fs";
 
 // Local Vite dev does not inject unprefixed secrets into process.env.
 // Node loads .env here; deployed environments continue to use their own secret binding.
-if (typeof process !== "undefined" && typeof process.loadEnvFile === "function") {
+if (typeof process !== "undefined" && typeof process.loadEnvFile === "function" && existsSync(".env")) {
   process.loadEnvFile();
 }
 
